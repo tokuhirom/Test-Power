@@ -1,5 +1,6 @@
 use strict;
 
+use Test::More;
 use Test::Power;
 
 pass;

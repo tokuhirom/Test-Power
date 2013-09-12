@@ -14,12 +14,7 @@ use parent qw(Exporter);
 use Test::Power::Core;
 use Test::Power::FromLine;
 
-our @EXPORT = qw(ok done_testing subtest plan pass fail);
-*done_testing = *Test::More::done_testing;
-*subtest      = *Test::More::subtest;
-*plan         = *Test::More::plan;
-*pass         = *Test::More::pass;
-*fail         = *Test::More::fail;
+our @EXPORT = qw(expect);
 
 use constant {
     RESULT_VALUE => 0,
@@ -29,8 +24,8 @@ use constant {
 our $DEPARSE = B::Deparse->new;
 our $DUMP_CUTOFF = 80;
 
-sub ok(&) {
-    my ($code) = @_;
+sub expect(&;$) {
+    my ($code, $description) = @_;
 
     my ($package, $filename, $line_no, $line) = Test::Power::FromLine::inspect_line(0);
 
@@ -39,7 +34,7 @@ sub ok(&) {
     local $@;
     my ($retval, $err, $tap_results, $op_stack)
         = Test::Power::Core->give_me_power($code);
-    my $description = "L$line_no" . (length($line) ? " : $line" : '');
+    $description ||= "L$line_no" . (length($line) ? " : $line" : '');
     if ($retval) {
         $BUILDER->ok(1, $description);
     } else {
@@ -69,17 +64,17 @@ Test::Power - With great power, comes great responsibility.
     use Test::Power;
 
     sub foo { 4 }
-    ok { foo() == 3 };
-    ok { foo() == 4 };
+    expect { foo() == 3 };
+    expect { foo() == 4 };
 
 Output:
 
-    not ok 1 - L12 : ok { foo() == 3 };
+    not ok 1 - L12 : expect { foo() == 3 };
     #   Failed test 'L12 : ok { foo() == 3 };'
     #   at foo.pl line 12.
     # foo()
     #    => 4
-    ok 2 - L13 : ok { foo() == 4 };
+    ok 2 - L13 : expect { foo() == 4 };
     1..2
     # Looks like you failed 1 test of 2.
 
@@ -94,12 +89,12 @@ Test::Power shows progress data if it fails. For example, here is a testing scri
     use Test::Power;
 
     sub foo { 3 }
-    ok { foo() == 2 };
+    expect { foo() == 2 };
     done_testing;
 
 Output is:
 
-    not ok 1 - L6: ok { foo() == 2 };
+    not ok 1 - L6: expect { foo() == 2 };
     # foo()
     #    => 3
     1..1
@@ -110,28 +105,12 @@ Woooooooh! It's pretty magical. C<Test::Power> shows the calculation progress! Y
 
 =over 4
 
-=item C<< ok(&code) >>
+=item C<< expect(&code) >>
 
-    ok { $foo };
+    expect { $foo };
 
 This simply runs the C<&code>, and uses that to determine if the test succeeded or failed.
 A true expression passes, a false one fails.  Very simple.
-
-=item C<< subtest() >>
-
-Same as C<Test::More::subtest>.
-
-=item C<< plan() >>
-
-Same as C<Test::More::plan>.
-
-=item C<< done_testing() >>
-
-Same as C<Test::More::done_testing>.
-
-=item C<< pass() >>
-
-Same as C<Test::More::pass>.
 
 =back
 

@@ -11,11 +11,11 @@ sub foo { 3 }
 subtest 'ok' => sub {
     check_test(
         sub {
-            Test::Power::ok(sub { foo() == 3 });
+            Test::Power::expect(sub { foo() == 3 });
         },
         {
             ok => 1,
-            name => "L14 : Test::Power::ok(sub { foo() == 3 });",
+            name => "L14 : Test::Power::expect(sub { foo() == 3 });",
             diag => "",
         }
     );
@@ -24,11 +24,11 @@ subtest 'ok' => sub {
 subtest 'fail' => sub {
     check_test(
         sub {
-            Test::Power::ok(sub { foo() == 2 });
+            Test::Power::expect(sub { foo() == 2 });
         },
         {
             ok => 0,
-            name => "L27 : Test::Power::ok(sub { foo() == 2 });",
+            name => "L27 : Test::Power::expect(sub { foo() == 2 });",
             diag => "foo()\n   => 3",
         }
     );
