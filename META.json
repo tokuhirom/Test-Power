@@ -46,7 +46,8 @@
             "B::Utils" : "0",
             "Test::More" : "0.98",
             "Text::Truncate" : "0",
-            "perl" : "5.008005"
+            "parent" : "0",
+            "perl" : "5.010001"
          }
       },
       "test" : {
