@@ -23,11 +23,11 @@ Output:
 
 # DESCRIPTION
 
-__WARNINGS: This module is currently ALPHA state. Any APIs will change without notice. And this module uses the B power, it may cause segmentation fault.__
+__WARNINGS: This module is currently on ALPHA state. Any APIs will change without notice. Notice that since this module uses the B power, it may cause segmentation fault.__
 
 Test::Power is yet another testing framework.
 
-Test::Power shows progress data if it's fails. For example, here is a testing script using Test::Power. This test may fail.
+Test::Power shows progress data if it fails. For example, here is a testing script using Test::Power. This test may fail.
 
     use Test::Power;
 
@@ -42,7 +42,7 @@ Output is:
     #    => 3
     1..1
 
-Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! You don't need to use different functions for testing types, like ok, cmp\_ok, is...
+Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! You don't need to use different functions for different testing types; like ok, cmp\_ok, is...
 
 # EXPORTABLE FUNCTIONS
 
@@ -50,7 +50,7 @@ Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! Yo
 
         ok { $foo };
 
-    This simply run the `&code`, and uses that to determine if the test succeeded or failed.
+    This simply runs the `&code`, and uses that to determine if the test succeeded or failed.
     A true expression passes, a false one fails.  Very simple.
 
 - `subtest()`
