@@ -23,8 +23,7 @@ Output:
 
 # DESCRIPTION
 
-__WARNINGS: This module is currently on ALPHA state. Any APIs will change
-without notice. Notice that since  this module uses the B power, it may cause segmentation fault.__
+__WARNINGS: This module is currently on ALPHA state. Any APIs will change without notice. Notice that since this module uses the B power, it may cause segmentation fault.__
 
 Test::Power is yet another testing framework.
 
@@ -43,8 +42,7 @@ Output is:
     #    => 3
     1..1
 
-Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress!
-You don't need to use different functions for different testing types; like ok, cmp\_ok, is...
+Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! You don't need to use different functions for different testing types; like ok, cmp\_ok, is...
 
 # EXPORTABLE FUNCTIONS
 
