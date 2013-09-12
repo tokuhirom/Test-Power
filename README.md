@@ -42,7 +42,7 @@ Output is:
     #    => 3
     1..1
 
-Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! You don't need to use different functions for different testing types; like ok, cmp\_ok, is...
+Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! You don't need to use different functions for different testing types, like ok, cmp\_ok, is...
 
 # EXPORTABLE FUNCTIONS
 
