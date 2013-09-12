@@ -25,6 +25,8 @@ Output:
 
 __WARNINGS: This module is currently on ALPHA state. Any APIs will change without notice. Notice that since this module uses the B power, it may cause segmentation fault.__
 
+__WARNINGS AGAIN: Current version of Test::Power does not support ithreads.__
+
 Test::Power is yet another testing framework.
 
 Test::Power shows progress data if it fails. For example, here is a testing script using Test::Power. This test may fail.

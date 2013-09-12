@@ -2,6 +2,14 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.03 2013-09-12T21:02:28Z
+
+    - use B::GVOP for generating OP_GV. It makes more portable.
+      (tokuhirom)
+    - Die under the ithreads.
+      I will support it again...!
+      (tokuhirom)
+
 0.02 2013-09-12T10:17:55Z
 
     - s/ok/expect/
