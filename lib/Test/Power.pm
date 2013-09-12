@@ -89,7 +89,7 @@ B<WARNINGS: This module is currently ALPHA state. Any APIs will change without n
 
 Test::Power is yet another testing framework.
 
-Test::Power shows progress data if it's failes. For example, here is a testing script using Test::Power. This test may fail.
+Test::Power shows progress data if it's fails. For example, here is a testing script using Test::Power. This test may fail.
 
     use Test::Power;
 
@@ -104,7 +104,7 @@ Output is:
     #    => 3
     1..1
 
-Woooooooh! It's pretty magical. Test::Power.pm shows the calcuration progress! You don't need to use different functions for testing types, like ok, cmp_ok, is...
+Woooooooh! It's pretty magical. C<Test::Power> shows the calculation progress! You don't need to use different functions for testing types, like ok, cmp_ok, is...
 
 =head1 EXPORTABLE FUNCTIONS
 
