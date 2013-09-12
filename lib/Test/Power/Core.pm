@@ -10,6 +10,8 @@ use B qw(class);
 use B::Generate;
 use B::Utils;
 
+use Test::Power::B qw(op_grep op_walk code_concise);
+
 our @OP_STACK;
 our @TAP_RESULTS;
 
@@ -31,6 +33,11 @@ sub give_me_power {
     # local $B::overlay = {};
     if (not null $root) {
         B::walkoptree($cv->ROOT, 'power_test');
+    }
+    if (0) {
+        require B::Concise;
+        my $walker = B::Concise::compile('', '', $code);
+        $walker->();
     }
     my $retval = eval { $code->() };
     return (
@@ -91,12 +98,12 @@ sub B::BINOP::power_test {
 }
 
 sub wrap_by_tap {
-    my ($target, $entrypoint, $set_entrypoint) = @_;
+    my ($target, $target_entrypoint, $set_entrypoint) = @_;
 
     my $pushmark = B::OP->new('pushmark', 0);
     $pushmark->sibling($target);
 
-    my $gv = B::SVOP->new('gv', 0, *tap);
+    my $gv = B::GVOP->new('gv', 0, *tap);
     my $rv2cv = B::UNOP->new('rv2cv', 0, $gv);
     my $list = B::LISTOP->new('list', 0, $pushmark, $rv2cv);
 
@@ -105,6 +112,7 @@ sub wrap_by_tap {
     $target->sibling($target_op_idx);
     $target_op_idx->sibling($rv2cv);
 
+    # B::OPf_STACKED | B::OPf_WANT_SCALAR | B::OPf_KIDS;
     my $entersub = B::UNOP->new(
         'entersub',
         $target->flags, # really?
@@ -113,7 +121,7 @@ sub wrap_by_tap {
 
     # Connect nodes next links.
     $set_entrypoint->($pushmark);
-    $pushmark->next($entrypoint);
+    $pushmark->next($target_entrypoint);
     $target->next($target_op_idx);
     $target_op_idx->next($gv);
     $gv->next($entersub);
