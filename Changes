@@ -2,6 +2,10 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.02 2013-09-12T10:17:55Z
+
+    - s/ok/expect/
+
 0.01 2013-09-12T05:48:54Z
 
     - original version
