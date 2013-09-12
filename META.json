@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "With great power, comes great responsibility.",
    "author" : [
       "tokuhirom <tokuhirom@gmail.com>"
    ],
@@ -42,15 +42,30 @@
       },
       "runtime" : {
          "requires" : {
+            "B::Generate" : "0",
+            "B::Utils" : "0",
+            "Test::More" : "0.98",
+            "Text::Truncate" : "0",
             "perl" : "5.008005"
          }
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.98"
+            "Test::Tester" : "0"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/tokuhirom/Test-Power/issues"
+      },
+      "homepage" : "https://github.com/tokuhirom/Test-Power",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/tokuhirom/Test-Power.git",
+         "web" : "https://github.com/tokuhirom/Test-Power"
+      }
+   },
    "version" : "0.01"
 }
