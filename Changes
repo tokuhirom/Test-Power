@@ -2,6 +2,13 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.04 2013-09-14T03:44:48Z
+
+    - Use B::Tap!
+      (tokuhirom)
+    - Support ithreads!
+      (tokuhirom)
+
 0.03 2013-09-12T21:02:28Z
 
     - use B::GVOP for generating OP_GV. It makes more portable.

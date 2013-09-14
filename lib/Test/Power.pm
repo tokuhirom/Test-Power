@@ -3,7 +3,7 @@ use 5.014000;
 use strict;
 use warnings;
 
-our $VERSION = "0.03";
+our $VERSION = "0.04";
 
 use Test::More 0.98 ();
 use B::Deparse;
@@ -20,11 +20,6 @@ use constant {
     RESULT_VALUE => 0,
     RESULT_OPINDEX => 1,
 };
-
-use Config;
-if ($Config{useithreads}) {
-    die "Sorry, current version of Test::Power does not support ithreads. I want to fix this issue. Patches welcome.\n";
-}
 
 our $DEPARSE = B::Deparse->new;
 our $DUMP_CUTOFF = 80;
