@@ -7,7 +7,6 @@ use 5.010_001;
 # TODO: support method call
 
 use B qw(class);
-use B::Utils;
 use B::Tap qw(tap);
 
 our @TAP_RESULTS;
