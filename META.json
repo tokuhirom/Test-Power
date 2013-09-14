@@ -43,6 +43,7 @@
       "runtime" : {
          "requires" : {
             "B::Tap" : "0.01",
+            "B::Tools" : "0.01",
             "Test::More" : "0.98",
             "Text::Truncate" : "0",
             "parent" : "0",
