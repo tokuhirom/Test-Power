@@ -42,7 +42,6 @@
       },
       "runtime" : {
          "requires" : {
-            "B::Generate" : "0",
             "B::Tap" : "0",
             "B::Utils" : "0",
             "Test::More" : "0.98",

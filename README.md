@@ -55,6 +55,13 @@ Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! Yo
     This simply runs the `&code`, and uses that to determine if the test succeeded or failed.
     A true expression passes, a false one fails.  Very simple.
 
+# REQUIRED PERL VERSION
+
+Perl5.14+ is required. 5.14+ provides better support for custom ops.
+[B::Tap](http://search.cpan.org/perldoc?B::Tap) required this. Under 5.14, perl5 can't do B::Deparse.
+
+Patches welcome to support 5.12, 5.10, 5.8.
+
 # LICENSE
 
 Copyright (C) tokuhirom.

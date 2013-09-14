@@ -1,5 +1,4 @@
 requires 'perl', '5.014000';
-requires 'B::Generate';
 requires 'B::Utils';
 requires 'Text::Truncate';
 requires 'Test::More', 0.98;
