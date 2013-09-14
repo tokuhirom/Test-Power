@@ -9,9 +9,10 @@ use 5.010_001;
 use B qw(class);
 use B::Generate;
 use B::Utils;
+use B::Tap qw(tap);
 
-our @OP_STACK;
 our @TAP_RESULTS;
+our $ROOT;
 
 sub null {
     my $op = shift;
@@ -24,12 +25,10 @@ sub give_me_power {
     my $cv= B::svref_2object($code);
 
     local @TAP_RESULTS;
-    local @OP_STACK;
 
-
-    my $root = $cv->ROOT;
+    local $ROOT = $cv->ROOT;
     # local $B::overlay = {};
-    if (not null $root) {
+    if (not null $ROOT) {
         B::walkoptree($cv->ROOT, 'power_test');
     }
     if (0) {
@@ -41,8 +40,7 @@ sub give_me_power {
     return (
         $retval,
         $@,
-        [@TAP_RESULTS],
-        [@OP_STACK],
+        [grep { @$_ > 1 } @TAP_RESULTS],
     );
 }
 
@@ -61,29 +59,14 @@ sub B::BINOP::power_test {
     );
     if ($supported_ops{$self->name}) {
         if ($self->first->name ne 'const') {
-            my $entersub = wrap_by_tap(
-                $self->first,
-                [$self->parent->kids]->[0]->next(),
-                sub {
-                    [$self->parent->kids]->[0]->next(@_);
-                }
-            );
-            $entersub->next($self->last);
-            $entersub->sibling($self->last);
-            $self->first($entersub);
+            my @buf = ($self->first);
+            tap($self->first, $ROOT, \@buf);
+            push @TAP_RESULTS, \@buf;
         }
         if ($self->last->name ne 'const') {
-            my $nnext = $self->last->next;
-            my $entersub = wrap_by_tap(
-                $self->last,
-                $self->first->next,
-                sub {
-                    $self->first->next(@_),
-                }
-            );
-            $self->first->sibling($entersub);
-            $entersub->next($nnext);
-            $self->last($entersub);
+            my @buf = ($self->last);
+            tap($self->last, $ROOT, \@buf);
+            push @TAP_RESULTS, \@buf;
         }
 
     #   UNOP (0x1ac6b18) entersub [1]
@@ -95,47 +78,4 @@ sub B::BINOP::power_test {
     }
 }
 
-sub wrap_by_tap {
-    my ($target, $target_entrypoint, $set_entrypoint) = @_;
-
-    my $pushmark = B::OP->new('pushmark', 0);
-    $pushmark->sibling($target);
-
-    my $gv = B::GVOP->new('gv', 0, *tap);
-    my $rv2cv = B::UNOP->new('rv2cv', 0, $gv);
-    my $list = B::LISTOP->new('list', 0, $pushmark, $rv2cv);
-
-    push @OP_STACK, $target;
-    my $target_op_idx = B::SVOP->new('const', 0, 0+@OP_STACK-1);
-    $target->sibling($target_op_idx);
-    $target_op_idx->sibling($rv2cv);
-
-    # B::OPf_STACKED | B::OPf_WANT_SCALAR | B::OPf_KIDS;
-    my $entersub = B::UNOP->new(
-        'entersub',
-        $target->flags, # really?
-        $list,
-    );
-
-    # Connect nodes next links.
-    $set_entrypoint->($pushmark);
-    $pushmark->next($target_entrypoint);
-    $target->next($target_op_idx);
-    $target_op_idx->next($gv);
-    $gv->next($entersub);
-
-    return $entersub;
-}
-
-sub tap {
-    my ($stuff, $target_op_idx) = @_;
-    push @TAP_RESULTS, [
-        $stuff,
-        $target_op_idx,
-    ];
-    return $stuff;
-}
-
-
 1;
-
