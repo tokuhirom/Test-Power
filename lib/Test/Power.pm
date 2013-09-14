@@ -21,7 +21,6 @@ use constant {
     RESULT_OPINDEX => 1,
 };
 
-our $DEPARSE = B::Deparse->new;
 our $DUMP_CUTOFF = 80;
 
 sub expect(&;$) {
@@ -46,7 +45,9 @@ sub expect(&;$) {
             my $op = shift @$result;
             for my $value (@$result) {
                 # take first argument if the value is scalar.
-                $BUILDER->diag($DEPARSE->deparse($op));
+                my $deparse = B::Deparse->new();
+                $deparse->{curcv} = B::svref_2object($code);
+                $BUILDER->diag($deparse->deparse($op));
                 $BUILDER->diag("   => " . truncstr(Data::Dumper::Dumper($value->[1]), $DUMP_CUTOFF, '...'));
             }
         }
