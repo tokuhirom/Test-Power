@@ -42,12 +42,12 @@
       },
       "runtime" : {
          "requires" : {
-            "B::Generate" : "0",
+            "B::Tap" : "0",
             "B::Utils" : "0",
             "Test::More" : "0.98",
             "Text::Truncate" : "0",
             "parent" : "0",
-            "perl" : "5.010001"
+            "perl" : "5.014000"
          }
       },
       "test" : {
