@@ -2,6 +2,11 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.05 2013-09-14T05:52:24Z
+
+    - Hook all entersubs.
+    - Fixed usage of B::Deparse
+
 0.04 2013-09-14T03:44:48Z
 
     - Use B::Tap!
