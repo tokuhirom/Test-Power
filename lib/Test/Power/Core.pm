@@ -10,8 +10,6 @@ use B qw(class);
 use B::Generate;
 use B::Utils;
 
-use Test::Power::B qw(op_grep op_walk code_concise);
-
 our @OP_STACK;
 our @TAP_RESULTS;
 
