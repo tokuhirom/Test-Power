@@ -2,6 +2,11 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.06 2013-09-14T06:59:43Z
+
+    - Depend on B::Tap 0.02
+      (tokuhirom)
+
 0.05 2013-09-14T05:52:24Z
 
     - Hook all entersubs.

@@ -42,7 +42,7 @@
       },
       "runtime" : {
          "requires" : {
-            "B::Tap" : "0.01",
+            "B::Tap" : "0.02",
             "B::Tools" : "0.01",
             "Test::More" : "0.98",
             "Text::Truncate" : "0",
@@ -68,7 +68,7 @@
          "web" : "https://github.com/tokuhirom/Test-Power"
       }
    },
-   "version" : "0.05",
+   "version" : "0.06",
    "x_contributors" : [
       "adrian.candos <adrian.candos@dena.jp>"
    ]
