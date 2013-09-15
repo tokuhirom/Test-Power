@@ -15,5 +15,7 @@ expect { foo() == 3 };
 expect { bar() == 3 };
 expect { my $foo = Foo->new(); $foo->wow(3) == 6 };
 
+expect { die };
+
 done_testing;
 
