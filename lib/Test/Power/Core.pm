@@ -6,7 +6,7 @@ use 5.010_001;
 
 # TODO: support method call
 
-use B qw(class);
+use B qw(class ppname);
 use B::Tap qw(tap);
 use B::Tools qw(op_walk);
 
@@ -29,7 +29,7 @@ sub give_me_power {
     # local $B::overlay = {};
     if (not null $ROOT) {
         op_walk {
-            if ($_->name eq 'entersub') {
+            if (need_hook($_)) {
                 my @buf = ($_);
                 tap($_, $cv->ROOT, \@buf);
                 push @TAP_RESULTS, \@buf;
@@ -47,6 +47,14 @@ sub give_me_power {
         $@,
         [grep { @$_ > 1 } @TAP_RESULTS],
     );
+}
+
+sub need_hook {
+    my $op = shift;
+    return 1 if $op->name eq 'entersub';
+    return 1 if $op->name eq 'padsv';
+    return 1 if $op->name eq 'null' && ppname($op->targ) eq 'pp_rv2sv';
+    return 0;
 }
 
 1;
