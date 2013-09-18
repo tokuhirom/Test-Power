@@ -2,6 +2,11 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.08 2013-09-18T05:06:33Z
+
+    - tap rv2cv, padsv.
+      (tokuhirom)
+
 0.07 2013-09-15T03:14:10Z
 
     - Depended on B::Tap 0.04
