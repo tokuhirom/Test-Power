@@ -53,6 +53,8 @@ sub need_hook {
     my $op = shift;
     return 1 if $op->name eq 'entersub';
     return 1 if $op->name eq 'padsv';
+    return 1 if $op->name eq 'aelem';
+    return 1 if $op->name eq 'helem';
     return 1 if $op->name eq 'null' && ppname($op->targ) eq 'pp_rv2sv';
     return 0;
 }
