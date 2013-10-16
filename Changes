@@ -2,6 +2,11 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.09 2013-10-16T02:33:14Z
+
+    - tap helem, aelem.
+      (tokuhirom)
+
 0.08 2013-09-18T05:06:33Z
 
     - tap rv2cv, padsv.
