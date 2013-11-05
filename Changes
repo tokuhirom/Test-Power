@@ -2,6 +2,11 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.11 2013-11-05T07:13:44Z
+
+    - Depended on latest B::Tap, again.
+      (tokuhirom)
+
 0.10 2013-11-02T02:52:05Z
 
     - Depended on latest B::Tap. Because old one has a bug.
