@@ -65,6 +65,9 @@ sub give_me_power {
 sub dump_pairs {
     my ($code, $tap_results) = @_;
 
+    # Suppress warnings for: sub { expect(\@p)->to_be(['a']) }
+    local *B::Deparse::pp_padrange = sub { };
+
     my @pairs;
     local $Data::Dumper::Terse = 1;
     local $Data::Dumper::Indent = 0;
