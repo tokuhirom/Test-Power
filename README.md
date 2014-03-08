@@ -58,7 +58,7 @@ Woooooooh! It's pretty magical. `Test::Power` shows the calculation progress! Yo
 # REQUIRED PERL VERSION
 
 Perl5.14+ is required. 5.14+ provides better support for custom ops.
-[B::Tap](http://search.cpan.org/perldoc?B::Tap) required this. Under 5.14, perl5 can't do B::Deparse.
+[B::Tap](https://metacpan.org/pod/B::Tap) required this. Under 5.14, perl5 can't do B::Deparse.
 
 Patches welcome to support 5.12, 5.10, 5.8.
 
@@ -75,4 +75,4 @@ tokuhirom <tokuhirom@gmail.com>
 
 # SEE ALSO
 
-[Test::More](http://search.cpan.org/perldoc?Test::More)
+[Test::More](https://metacpan.org/pod/Test::More)

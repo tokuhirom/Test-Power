@@ -24,3 +24,8 @@ cover_db/
 MYMETA.*
 
 /Test-Power-*
+/.build
+/_build_params
+/Build.bat
+!Build/
+!META.json
