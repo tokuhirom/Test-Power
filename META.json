@@ -47,6 +47,7 @@
             "B::Tools" : "0.01",
             "Test::More" : "0.98",
             "Text::Truncate" : "0",
+            "Try::Tiny" : "0",
             "parent" : "0",
             "perl" : "5.014000"
          }
