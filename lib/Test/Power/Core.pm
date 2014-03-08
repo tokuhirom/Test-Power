@@ -11,6 +11,8 @@ our $VERSION = "0.12";
 use B qw(class ppname);
 use B::Tap qw(tap);
 use B::Tools qw(op_walk);
+use B::Deparse;
+use Data::Dumper ();
 use Try::Tiny;
 
 our @TAP_RESULTS;
