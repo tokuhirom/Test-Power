@@ -46,8 +46,9 @@ sub give_me_power {
     }
 
     my $err;
-    my $retval = try {
-        $code->()
+    my $retval;
+    try {
+        $retval = $code->()
     } catch {
         $err = $_;
     };
@@ -69,10 +70,14 @@ sub dump_pairs {
         my $op = shift @$result;
         for my $value (@$result) {
             # take first argument if the value is scalar.
-            my $deparse = B::Deparse->new();
-            $deparse->{curcv} = B::svref_2object($code);
-            push @pairs, $deparse->deparse($op);
-            push @pairs, Data::Dumper::Dumper($value->[1]);
+            try {
+                my $deparse = B::Deparse->new();
+                $deparse->{curcv} = B::svref_2object($code);
+                push @pairs, $deparse->deparse($op);
+                push @pairs, Data::Dumper::Dumper($value->[1]);
+            } catch {
+                warn $_
+            };
         }
     }
     return \@pairs;
