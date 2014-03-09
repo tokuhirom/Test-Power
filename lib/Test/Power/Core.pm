@@ -65,9 +65,6 @@ sub give_me_power {
 sub dump_pairs {
     my ($code, $tap_results) = @_;
 
-    # Suppress warnings for: sub { expect(\@p)->to_be(['a']) }
-    local *B::Deparse::pp_padrange = sub { };
-
     my @pairs;
     local $Data::Dumper::Terse = 1;
     local $Data::Dumper::Indent = 0;
@@ -76,6 +73,9 @@ sub dump_pairs {
         for my $value (@$result) {
             # take first argument if the value is scalar.
             try {
+                # Suppress warnings for: sub { expect(\@p)->to_be(['a']) }
+                local $SIG{__WARN__} = sub { };
+
                 my $deparse = B::Deparse->new();
                 $deparse->{curcv} = B::svref_2object($code);
                 push @pairs, $deparse->deparse($op);
