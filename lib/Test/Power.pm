@@ -31,13 +31,9 @@ sub expect(&;$) {
 
     my $BUILDER = Test::More->builder;
 
-    my ($retval, $err, $pairs) = Test::Power::Core->give_me_power($code);
+    my ($retval, $pairs) = Test::Power::Core->give_me_power($code);
 
     $BUILDER->ok($retval, $description);
-
-    if ($err) {
-        $BUILDER->diag($err);
-    }
 
     unless ($retval) {
         while (@$pairs) {

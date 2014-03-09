@@ -5,21 +5,24 @@ use Test::More;
 use Test::Power::Core;
 use Data::Dumper;
 
-subtest 'die', sub {
-    my ($retval, $err, $out) = Test::Power::Core->give_me_power(sub { die });
-    ok !$retval;
-};
+# Test case for the low level API.
 
 subtest 'return true value', sub {
-    my ($retval, $err, $out) = Test::Power::Core->give_me_power(sub { 1 });
-    ok $retval;
+    my ($retval, $out) = Test::Power::Core->give_me_power(sub { 2 });
+    is $retval, 2;
 };
 
-subtest 'expect', sub {
+subtest 'return undef value', sub {
+    my ($retval, $out) = Test::Power::Core->give_me_power(sub { undef });
+    is $retval, undef;
+};
+
+subtest 'expect data', sub {
     my @p;
-    my ($retval, $err, $out) = Test::Power::Core->give_me_power(sub { expect(\@p)->to_be(['a']) });
+    my ($retval, $out) = Test::Power::Core->give_me_power(sub { expect(\@p)->to_be(['a']) });
     ok !$retval;
-    diag $err;
+    ok @$out > 0;
+    like $out->[0], qr/expect/;
     diag Dumper($out);
 };
 

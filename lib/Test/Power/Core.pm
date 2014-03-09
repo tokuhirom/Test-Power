@@ -15,9 +15,6 @@ use B::Deparse;
 use Data::Dumper ();
 use Try::Tiny;
 
-our @TAP_RESULTS;
-our $ROOT;
-
 sub null {
     my $op = shift;
     return class($op) eq "NULL";
@@ -28,16 +25,16 @@ sub give_me_power {
 
     my $cv= B::svref_2object($code);
 
-    local @TAP_RESULTS;
+    my @tap_results;
 
-    local $ROOT = $cv->ROOT;
+    my $root = $cv->ROOT;
     # local $B::overlay = {};
-    if (not null $ROOT) {
+    if (not null $root) {
         op_walk {
             if (need_hook($_)) {
                 my @buf = ($_);
                 tap($_, $cv->ROOT, \@buf);
-                push @TAP_RESULTS, \@buf;
+                push @tap_results, \@buf;
             }
         } $cv->ROOT;
     }
@@ -47,18 +44,11 @@ sub give_me_power {
         $walker->();
     }
 
-    my $err;
-    my $retval;
-    try {
-        $retval = $code->()
-    } catch {
-        $err = $_;
-    };
+    my $retval = $code->();
 
     return (
         $retval,
-        $err,
-        dump_pairs($code, [grep { @$_ > 1 } @TAP_RESULTS]),
+        dump_pairs($code, [grep { @$_ > 1 } @tap_results]),
     );
 }
 
