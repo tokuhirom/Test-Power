@@ -3,7 +3,7 @@ use 5.014000;
 use strict;
 use warnings;
 
-our $VERSION = "0.12";
+our $VERSION = "0.13";
 
 use Test::More 0.98 ();
 use B::Deparse;

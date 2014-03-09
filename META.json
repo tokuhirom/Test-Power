@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.133380",
+   "generated_by" : "Minilla/v0.11.0, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -70,7 +70,7 @@
          "web" : "https://github.com/tokuhirom/Test-Power"
       }
    },
-   "version" : "0.12",
+   "version" : "0.13",
    "x_contributors" : [
       "adrian.candos <adrian.candos@dena.jp>"
    ]

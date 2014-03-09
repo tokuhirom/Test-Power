@@ -2,6 +2,16 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.13 2014-03-09T03:28:59Z
+
+    - Do not catch the exception in the code.
+      I can't remember the reason to catch exception.
+      (tokuhirom)
+    - Suppress warnings for pp_padrange.
+      (tokuhirom)
+    - Use Try::Tiny for better `local $@` implementation.
+      (tokuhirom)
+
 0.12 2013-11-05T07:58:30Z
 
     - Depended on latest B::Tap, again.
