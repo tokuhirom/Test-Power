@@ -5,13 +5,13 @@ use warnings;
 
 our $VERSION = "0.13";
 
-use Test::More 0.98 ();
-use B::Deparse;
-use Data::Dumper ();
-use Text::Truncate qw(truncstr);
 use parent qw(Exporter);
 
-use Test::Power::Core;
+use Test::More 0.98 ();
+use Data::Dumper ();
+use Text::Truncate qw(truncstr);
+use Devel::CodeObserver 0.11;
+
 use Test::Power::FromLine;
 
 our @EXPORT = qw(expect);
@@ -31,14 +31,13 @@ sub expect(&;$) {
 
     my $BUILDER = Test::More->builder;
 
-    my ($retval, $pairs) = Test::Power::Core->give_me_power($code);
+    my ($retval, $result) = Devel::CodeObserver->new->call($code);
 
     $BUILDER->ok($retval, $description);
 
     unless ($retval) {
-        while (@$pairs) {
-            my $code = shift @$pairs;
-            my $dump = shift @$pairs;
+        for my $pair (@{$result->dump_pairs}) {
+            my ($code, $dump) = @$pair;
             $BUILDER->diag("${code}");
             $BUILDER->diag("   => " . truncstr($dump, $DUMP_CUTOFF, '...'));
         }
