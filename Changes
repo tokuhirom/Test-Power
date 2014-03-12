@@ -2,6 +2,11 @@ Revision history for Perl extension Test-Power
 
 {{$NEXT}}
 
+0.14 2014-03-12T00:02:17Z
+
+    - use Devel::CodeObserver
+      (tokuhirom)
+
 0.13 2014-03-09T03:28:59Z
 
     - Do not catch the exception in the code.
